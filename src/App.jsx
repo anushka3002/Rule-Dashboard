@@ -10,7 +10,7 @@ function App() {
   const [data,setData]=useState([])
   const [button,setButton]=useState(false)
   const [actionButton,setActionButton]=useState(false)
-  const [input,setInput]=useState("Anushka")
+  const [input,setInput]=useState("Abcd")
   const [name,setName]=useState("Default Rule")
   const [toggle,setToggle]=useState(true)
   const [action,setAction]=useState({
