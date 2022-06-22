@@ -23,6 +23,7 @@ function App() {
   const [rename,setRename]=useState("rename")
   const [time,setTime]=useState("4:35")
   const [date,setDate]=useState("3-8-2022")
+  const [disableOnSave,setDisableOnSave]=useState(false)
 
   
   const addRule=(e)=>{
@@ -110,11 +111,13 @@ function App() {
     setShow("none")
     setDate(newDate)
     setTime(newTime)
+    setDisableOnSave(true)
   }
 
   const Editable=()=>{
     setToggle(1)
     setShow("block")
+    setDisableOnSave(false)
   }
 
   
@@ -156,8 +159,8 @@ function App() {
       <div id="dataSide">
         <p>App saved on {date} {time}</p>
         {(toggle===0)?
-        <button onClick={Editable} id="saveEdit">edit</button>:
-        <button onClick={NotEditable} id="saveEdit">save</button>
+        <button onClick={Editable} id="saveEdit">Edit</button>:
+        <button onClick={NotEditable} id="saveEdit">Done</button>
         }
         {/* <button id="saveEdit" onClick={handleSubmit}>Done</button> */}
       </div>
@@ -194,6 +197,7 @@ function App() {
         <br/>
         <p>Button Name</p>
         <input type="text"
+        disabled={disableOnSave}
         onClick={handleSubmit} 
         />
         <br/>
