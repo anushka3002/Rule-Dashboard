@@ -4,18 +4,16 @@ import './App.css'
 import axios from "axios"
 
 function App() {
+  const [num,setNum]=useState(0)
   const [data,setData]=useState([])
   const [button,setButton]=useState(false)
   const [name,setName]=useState("Default Rule")
   const [rule,setRule]=useState({
     "name":name,
   })
-  // const [store,setStore]=useState([])
+  const [rename,setRename]=useState("rename")
 
 
-  let ruleArray=[]
-  let count=1;
-  // let disable
   const addRule=(e)=>{
     e.preventDefault()
       axios.post("http://localhost:8080/ruleArray",rule).then(()=>{
@@ -31,10 +29,10 @@ function App() {
     getData()
   },[])
 
-  // useEffect(()=>{
     const getData=()=>{
       axios.get("http://localhost:8080/ruleArray").then((res)=>{
       setData(res.data)
+      setNum(res.data.length)
       if(res.data.length>=5){
         setButton(true)
       }
@@ -46,22 +44,22 @@ function App() {
     })
   }
 
-
-  // const postData=(e)=>{
-  //   e.preventDefault();
-  //   axios.post("http://localhost:8080/ruleArray",rule).then(()=>{
-  //     setRule({
-  //       "name":name
-  //     })
+  // const handleChange=(e)=>{
+  //   axios.patch(`http://localhost:8080/ruleArray/${5}`).then(()=>{
+  //     setName(e.target.value)
+  //     getData()
+  //     // console.log(e.target.value)
+  //     console.log(data)
   //   })
   // }
+
+
 
   return (
     <div className="App">
       <div id="header">
       <div id="header_items">
         <img src="https://www.esri.com/content/dam/esrisites/en-us/common/icons/product-logos/arcgis-dashboards.png" width="4%" height="60%"></img>
-        {/* <a href="https://www.flaticon.com/free-icons/dashboard" title="dashboard icons">Dashboard icons created by Slidicon - Flaticon</a> */}
         <div>
         <p>Demo Custom App</p>
         <p>APP NAME</p>
@@ -86,9 +84,12 @@ function App() {
     </div>
 
     <div id="dashboard">
+
+      {/* left part of the dashboard */}
       <div id="leftDashboard">
         <p>Back to Stages</p>
-        <p>RULES 2</p>
+        <p>RULES : {num}</p>
+        <p>{rename}</p>
         <div id="rules_list">
           {data.map((e)=> 
              <div key={e.id}>
@@ -107,7 +108,36 @@ function App() {
       </div>
 
       {/* right part of the dashboard */}
-      <div id="rightDashboard"></div>
+      <div id="rightDashboard">
+        {/* add new condition */}
+        <p>{name}</p>
+        <br/>
+        <p>Button Name</p>
+        <input type="text"
+        // onClick={handleChange} 
+        />
+        <br/>
+        <select>
+          <option>If All</option> 
+        </select><p>of the following conditions are met</p>
+        <br/>
+        <select>
+          <option>Text</option>
+        </select>
+        <select>
+          <option>Contains</option>
+        </select>
+        <input type="search" placeholder='type to search and add'></input>
+        <br/>
+          <button>Add New Condition</button>
+
+
+      {/* add another action */}
+      
+      <h3>Perform the following action</h3>
+      
+      </div>
+
     </div>
     </div>
   )

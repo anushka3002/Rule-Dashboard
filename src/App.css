@@ -54,6 +54,7 @@
 #rightDashboard{
   width:80%;
   border:1px solid black;
+  text-align: left;
 }
 #rules_list>div{
   display: flex;
@@ -70,6 +71,6 @@
   padding-bottom: 3%;
   margin-left: 10%;
 }
-/* #newRule:disabled{
-  pointer-events: none;
-} */
+#newRule:disabled{
+  cursor:not-allowed
+}
