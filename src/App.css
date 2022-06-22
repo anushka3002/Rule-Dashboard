@@ -75,10 +75,44 @@
   padding-bottom: 3%;
   margin-left: 10%;
 }
-#newRule:disabled{
-  cursor:not-allowed
-}
 #deleteIcon{
   margin-top: 2%;
   margin-left: 3%;
 }
+#actionPart>p{
+  border:1px solid black;
+  font-size: 12px;
+  padding-left:4%;
+  padding-right: 4%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+#saveEdit{
+  padding-left: 4%;
+  padding-right: 4%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+#newRulebutton{
+  padding-left: 4%;
+  padding-right: 4%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+#conditionButton{
+  margin-top: 3%;
+  padding-left: 4%;
+  padding-right: 4%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+#actionbutton{
+  padding-left: 4%;
+  padding-right: 4%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+button:disabled{
+  cursor:not-allowed
+}
+

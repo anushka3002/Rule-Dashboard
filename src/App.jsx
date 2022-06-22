@@ -123,7 +123,7 @@ function App() {
       </div>
       <div id="dataSide">
         <p>App saved on 27 July 2017 4:32pm</p>
-        <button onClick={handleSubmit}>Done</button>
+        <button id="saveEdit" onClick={handleSubmit}>Done</button>
       </div>
     </div>
 
@@ -144,10 +144,10 @@ function App() {
               getData();
               })
           }}
-              src="https://www.pngall.com/wp-content/uploads/5/Delete-Bin-Trash-PNG-Clipart.png" width="6%" height="6%"></img>
+              src="https://www.pngall.com/wp-content/uploads/5/Delete-Bin-Trash-PNG-Clipart.png" width="17px" height="15px"></img>
           </div>
           )}
-         <button id="newRule" disabled={button} onClick={addRule}>Add New Rule</button>
+         <button id="newRulebutton" disabled={button} onClick={addRule}>Add New Rule</button>
         </div>
       </div>
 
@@ -173,14 +173,14 @@ function App() {
         </select>
         <input type="search" placeholder='type to search and add'></input>
         <br/>
-          <button>Add New Condition</button>
+          <button id="conditionButton">Add New Condition</button>
 
 
       {/* add another action */}
       
-      <h3>Perform the following action</h3>
+      <p>Perform the following action</p>
       {actionData.map((index)=>
-      <div style={{display:"flex"}} key={index.id}>  
+      <div id="actionPart" style={{display:"flex"}} key={index.id}>  
         <p>{index.action}</p>
         <img id="deleteIcon"
              onClick={()=>{
@@ -191,7 +191,7 @@ function App() {
               src="https://www.pngall.com/wp-content/uploads/5/Delete-Bin-Trash-PNG-Clipart.png" width="17px" height="15px"></img>
       </div>
       )}
-      <button  disabled={actionButton} onClick={addAction}>Add New Action</button>
+      <button id="actionbutton" disabled={actionButton} onClick={addAction}>Add New Action</button>
 
       </div>
 
