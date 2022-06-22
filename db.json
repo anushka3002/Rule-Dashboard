@@ -1,24 +1,46 @@
 {
   "ruleArray": [
     {
-      "name": "My new cool name!",
-      "id": 5
+      "name": "Default Rule",
+      "id": 1
     },
     {
       "name": "Default Rule",
-      "id": 13
+      "id": 2
     },
     {
       "name": "Default Rule",
-      "id": 15
+      "id": 4
     },
     {
       "name": "Default Rule",
-      "id": 20
+      "id": 6
     },
     {
       "name": "Default Rule",
-      "id": 21
+      "id": 7
+    }
+  ],
+  "actionArray": [
+    {
+      "action": "START NEW APP",
+      "id": 2
+    },
+    {
+      "action": "START NEW APP",
+      "id": 7
+    },
+    {
+      "action": "START NEW APP",
+      "id": 8
+    },
+    {
+      "action": "START NEW APP",
+      "id": 9
+    },
+    {
+      "action": "START NEW APP",
+      "id": 10
     }
   ]
 }

@@ -5,25 +5,34 @@ import axios from "axios"
 
 function App() {
   const [num,setNum]=useState(0)
+  const [actionNum,setActionNum]=useState(0)
+  const [actionData,setActionData]=useState([])
   const [data,setData]=useState([])
   const [button,setButton]=useState(false)
+  const [actionButton,setActionButton]=useState(false)
+  const [input,setInput]=useState("Anushka")
   const [name,setName]=useState("Default Rule")
+  const [toggle,setToggle]=useState(true)
+  const [action,setAction]=useState({
+    "action":"START NEW APP"
+  })
   const [rule,setRule]=useState({
     "name":name,
   })
   const [rename,setRename]=useState("rename")
 
-
+  
   const addRule=(e)=>{
     e.preventDefault()
       axios.post("http://localhost:8080/ruleArray",rule).then(()=>{
       setRule({
-        "name":name
+        "name":name,
       })
     }).then(res=>{
       getData()
     })
   }
+
 
   useEffect(()=>{
     getData()
@@ -44,42 +53,77 @@ function App() {
     })
   }
 
-  // const handleChange=(e)=>{
-  //   axios.patch(`http://localhost:8080/ruleArray/${5}`).then(()=>{
-  //     setName(e.target.value)
-  //     getData()
-  //     // console.log(e.target.value)
-  //     console.log(data)
-  //   })
-  // }
+
+  const addAction=()=>{
+    // el.preventDefault()
+      axios.post("http://localhost:8080/actionArray",action).then(()=>{
+      setAction({
+        "action":"START NEW APP",
+      })
+      console.log("action")
+    })
+    .then(res=>{
+      getActionData()
+    })
+  }
+
+  useEffect(()=>{
+    getActionData()
+  },[])
+
+  const getActionData=()=>{
+    axios.get("http://localhost:8080/actionArray").then((res)=>{
+      setActionData(res.data)
+      setActionNum(res.data.length)
+      console.log("action")
+      if(res.data.length>=5){
+        setActionButton(true)
+      }
+      else{
+        setActionButton(false)
+      }
+      console.log(res.data)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
 
 
-
+  const handleSubmit=(e)=>{
+    const response = axios.patch(`http://localhost:8080/ruleArray/${data.length}`, { name: e.target.value }).then(()=>{
+      console.log(response.name)
+      // getData()
+      // setName(input)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
+  
   return (
     <div className="App">
       <div id="header">
       <div id="header_items">
-        <img src="https://www.esri.com/content/dam/esrisites/en-us/common/icons/product-logos/arcgis-dashboards.png" width="4%" height="60%"></img>
+        <img src="https://www.esri.com/content/dam/esrisites/en-us/common/icons/product-logos/arcgis-dashboards.png" width="20%" height="60%"></img>
         <div>
         <p>Demo Custom App</p>
         <p>APP NAME</p>
         </div>
-        <h3>></h3>
+        <img src="https://pngroyale.com/wp-content/uploads/2022/03/Right-Arrow-Download-Transparent-PNG-Image.png"></img>
         <div>
         <p>Assessment</p>
         <p>STAGE</p>
         </div>
-        <h3>></h3>
+        <img src="https://pngroyale.com/wp-content/uploads/2022/03/Right-Arrow-Download-Transparent-PNG-Image.png"></img>
         <div>
         <p>Create PO</p>
         <p>BUTTON</p>
         </div>
-        <h3>></h3>
+        <img src="https://pngroyale.com/wp-content/uploads/2022/03/Right-Arrow-Download-Transparent-PNG-Image.png"></img>
         <p>Button Rules</p>
       </div>
       <div id="dataSide">
         <p>App saved on 27 July 2017 4:32pm</p>
-        <button>Done</button>
+        <button onClick={handleSubmit}>Done</button>
       </div>
     </div>
 
@@ -114,7 +158,7 @@ function App() {
         <br/>
         <p>Button Name</p>
         <input type="text"
-        // onClick={handleChange} 
+        onClick={handleSubmit} 
         />
         <br/>
         <select>
@@ -135,7 +179,20 @@ function App() {
       {/* add another action */}
       
       <h3>Perform the following action</h3>
-      
+      {actionData.map((index)=>
+      <div style={{display:"flex"}} key={index.id}>  
+        <p>{index.action}</p>
+        <img id="deleteIcon"
+             onClick={()=>{
+              axios.delete(`http://localhost:8080/actionArray/${index.id}`).then(res=>{
+              getActionData();
+              })
+          }}
+              src="https://www.pngall.com/wp-content/uploads/5/Delete-Bin-Trash-PNG-Clipart.png" width="17px" height="15px"></img>
+      </div>
+      )}
+      <button  disabled={actionButton} onClick={addAction}>Add New Action</button>
+
       </div>
 
     </div>
