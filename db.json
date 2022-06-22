@@ -14,33 +14,21 @@
     },
     {
       "name": "Default Rule",
-      "id": 8
-    },
-    {
-      "name": "Default Rule",
-      "id": 9
+      "id": 5
     }
   ],
   "actionArray": [
-    {
-      "action": "START NEW APP",
-      "id": 10
-    },
-    {
-      "action": "START NEW APP",
-      "id": 11
-    },
-    {
-      "action": "START NEW APP",
-      "id": 12
-    },
     {
       "action": "START NEW APP",
       "id": 14
     },
     {
       "action": "START NEW APP",
-      "id": 15
+      "id": 16
+    },
+    {
+      "action": "START NEW APP",
+      "id": 17
     }
   ]
 }

@@ -12,7 +12,8 @@ function App() {
   const [actionButton,setActionButton]=useState(false)
   const [input,setInput]=useState("Abcd")
   const [name,setName]=useState("Default Rule")
-  const [toggle,setToggle]=useState(true)
+  const [toggle,setToggle]=useState(0)
+  const [show,setShow]=useState("none")
   const [action,setAction]=useState({
     "action":"START NEW APP"
   })
@@ -20,6 +21,8 @@ function App() {
     "name":name,
   })
   const [rename,setRename]=useState("rename")
+  const [time,setTime]=useState("4:35")
+  const [date,setDate]=useState("3-8-2022")
 
   
   const addRule=(e)=>{
@@ -99,6 +102,35 @@ function App() {
     })
   }
   
+  let today = new Date();
+  let newDate = today.getDate()+"-"+(today.getMonth()+1)+"-"+today.getFullYear();
+  let newTime= new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+  const NotEditable=()=>{
+    setToggle(0)
+    setShow("none")
+    setDate(newDate)
+    setTime(newTime)
+  }
+
+  const Editable=()=>{
+    setToggle(1)
+    setShow("block")
+  }
+
+  
+
+
+
+  
+
+
+  // const [ctime,setCtime]=useState(time)
+
+  // const updateTime=()=>{
+  //     time=new Date().toLocaleTimeString()
+  //     setCtime(time)
+  // }
+
   return (
     <div className="App">
       <div id="header">
@@ -122,8 +154,12 @@ function App() {
         <p>Button Rules</p>
       </div>
       <div id="dataSide">
-        <p>App saved on 27 July 2017 4:32pm</p>
-        <button id="saveEdit" onClick={handleSubmit}>Done</button>
+        <p>App saved on {date} {time}</p>
+        {(toggle===0)?
+        <button onClick={Editable} id="saveEdit">edit</button>:
+        <button onClick={NotEditable} id="saveEdit">save</button>
+        }
+        {/* <button id="saveEdit" onClick={handleSubmit}>Done</button> */}
       </div>
     </div>
 
@@ -131,14 +167,14 @@ function App() {
 
       {/* left part of the dashboard */}
       <div id="leftDashboard">
-        <p>Back to Stages</p>
-        <p>RULES : {num}</p>
-        <p>{rename}</p>
+        <p style={{textAlign:"left",paddingLeft:"4%"}}>Back to Stages</p>
+        <p style={{textAlign:"left",paddingLeft:"4%",marginTop:"25%"}}>RULES : {num}</p>
         <div id="rules_list">
           {data.map((e)=> 
              <div key={e.id}>
              <p>{e.name}</p> 
              <img
+             style={{display:show}}
              onClick={()=>{
               axios.delete(`http://localhost:8080/ruleArray/${e.id}`).then(res=>{
               getData();
@@ -147,7 +183,7 @@ function App() {
               src="https://www.pngall.com/wp-content/uploads/5/Delete-Bin-Trash-PNG-Clipart.png" width="17px" height="15px"></img>
           </div>
           )}
-         <button id="newRulebutton" disabled={button} onClick={addRule}>Add New Rule</button>
+         <button  id="newRulebutton" style={{display:show,margin:"auto"}} disabled={button} onClick={addRule}>Add New Rule</button>
         </div>
       </div>
 
@@ -173,7 +209,8 @@ function App() {
         </select>
         <input type="search" placeholder='type to search and add'></input>
         <br/>
-          <button id="conditionButton">Add New Condition</button>
+          <button style={{display:show}} id="conditionButton">Add New Condition</button>
+          <hr></hr>
 
 
       {/* add another action */}
@@ -183,6 +220,7 @@ function App() {
       <div id="actionPart" style={{display:"flex"}} key={index.id}>  
         <p>{index.action}</p>
         <img id="deleteIcon"
+        style={{display:show}}
              onClick={()=>{
               axios.delete(`http://localhost:8080/actionArray/${index.id}`).then(res=>{
               getActionData();
@@ -191,7 +229,8 @@ function App() {
               src="https://www.pngall.com/wp-content/uploads/5/Delete-Bin-Trash-PNG-Clipart.png" width="17px" height="15px"></img>
       </div>
       )}
-      <button id="actionbutton" disabled={actionButton} onClick={addAction}>Add New Action</button>
+      <hr></hr>
+      <button style={{display:show}} id="actionbutton" disabled={actionButton} onClick={addAction}>Add New Action</button>
 
       </div>
 

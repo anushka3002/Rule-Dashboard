@@ -6,6 +6,7 @@
   width:100%;
   height:20%;
   display: flex;
+  padding-bottom: 1%;
 }
 #header_items{
   display: flex;
@@ -88,10 +89,12 @@
   padding-bottom: 1%;
 }
 #saveEdit{
-  padding-left: 4%;
-  padding-right: 4%;
+  padding-left: 6%;
+  padding-right: 6%;
   padding-top: 1%;
   padding-bottom: 1%;
+  background-color: gray;
+  color:white;
 }
 #newRulebutton{
   padding-left: 4%;
