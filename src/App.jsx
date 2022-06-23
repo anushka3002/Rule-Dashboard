@@ -222,7 +222,7 @@ function App() {
         <div id="rules_list">
           {data.map((e)=> 
              <div key={e.id}>
-              <h5 style={{marginTop:"10%",marginLeft:"5px"}}>id:{e.id}</h5>
+              <h5 style={{marginTop:"10%",marginLeft:"5px"}}>id: {e.id}</h5>
              <p>{e.name}</p> 
              <img
              style={{display:show}}
