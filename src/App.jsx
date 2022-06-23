@@ -30,6 +30,7 @@ function App() {
     "condition":""
   })
   const [storeCondition,setStoreCondition]=useState([])
+  const [ruleId,setRuleId]=useState(0)
 
   
   const addRule=(e)=>{
@@ -58,6 +59,8 @@ function App() {
       else{
         setButton(false)
       }
+     
+      // console.log(res.data.length)
     }).catch((err)=>{
       console.log(err)
     })
@@ -99,33 +102,22 @@ function App() {
   }
 
 
+  const handleNameChange=(e)=>{
+    setInput(e.target.value)
+  }
+
+
   const handleSubmit=(e)=>{
-    const response = axios.patch(`http://localhost:8080/ruleArray/${data.length}`, { name: e.target.value }).then(()=>{
+    const response = axios.patch(`http://localhost:8080/ruleArray/${data.length}`, { name: input }).then(()=>{
       console.log(response.name)
       // getData()
-      // setName(input)
-    }).catch((err)=>{
-      console.log(err)
+      // setName(res)
+    }).then(()=>{
+      getData()
     })
   }
   
-  let today = new Date();
-  let newDate = today.getDate()+"-"+(today.getMonth()+1)+"-"+today.getFullYear();
-  let newTime= new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
-
-  const NotEditable=()=>{
-    setToggle(0)
-    setShow("none")
-    setDate(newDate)
-    setTime(newTime)
-    setDisableOnSave(true)
-  }
-
-  const Editable=()=>{
-    setToggle(1)
-    setShow("block")
-    setDisableOnSave(false)
-  }
+  
 
   
   const handleCondition=(e)=>{
@@ -165,7 +157,24 @@ function App() {
 
 
 
-  
+  let today = new Date();
+  let newDate = today.getDate()+"-"+(today.getMonth()+1)+"-"+today.getFullYear();
+  let newTime= new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+
+  const NotEditable=()=>{
+    setToggle(0)
+    setShow("none")
+    setDate(newDate)
+    setTime(newTime)
+    setDisableOnSave(true)
+    handleSubmit()
+  }
+
+  const Editable=()=>{
+    setToggle(1)
+    setShow("block")
+    setDisableOnSave(false)
+  }
 
 
   return (
@@ -209,6 +218,7 @@ function App() {
         <div id="rules_list">
           {data.map((e)=> 
              <div key={e.id}>
+              <h5>id:{e.id}</h5>
              <p>{e.name}</p> 
              <img
              style={{display:show}}
@@ -232,8 +242,9 @@ function App() {
         <p>Button Name</p>
         <input type="text"
         disabled={disableOnSave}
-        onClick={handleSubmit} 
+        onChange={handleNameChange} 
         />
+        <input type="number"></input>
         <br/>
         <select>
           <option>If All</option> 
