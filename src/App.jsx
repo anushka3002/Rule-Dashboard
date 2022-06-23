@@ -244,7 +244,6 @@ function App() {
           <option>Contains</option>
         </select>
         <input className='condition'
-        disabled={disableOnSave}
         style={{display:show}}
         onChange={handleCondition}
         value={condition.condition}
