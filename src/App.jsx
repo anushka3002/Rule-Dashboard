@@ -33,6 +33,8 @@ function App() {
   const [ruleId,setRuleId]=useState(0)
 
   
+
+  // rule part
   const addRule=(e)=>{
     e.preventDefault()
       axios.post("http://localhost:8080/ruleArray",rule).then(()=>{
@@ -66,6 +68,8 @@ function App() {
     })
   }
 
+
+  // action adding part
 
   const addAction=()=>{
     // el.preventDefault()
@@ -102,6 +106,8 @@ function App() {
   }
 
 
+  // renaming the rules name
+
   const handleNameChange=(e)=>{
     setInput(e.target.value)
   }
@@ -123,6 +129,7 @@ function App() {
   
   
 
+  // condition adding part
   
   const handleCondition=(e)=>{
     setCondition({...condition,[e.target.className]:e.target.value})
@@ -160,6 +167,7 @@ function App() {
   },[])
 
 
+  // timestamp 
 
   let today = new Date();
   let newDate = today.getDate()+"-"+(today.getMonth()+1)+"-"+today.getFullYear();
