@@ -218,7 +218,7 @@ function App() {
       {/* left part of the dashboard */}
       <div id="leftDashboard">
         <p style={{textAlign:"left",paddingLeft:"4%"}}>Back to Stages</p>
-        <p style={{textAlign:"left",paddingLeft:"4%",marginTop:"25%"}}>RULES : {num}</p>
+        <p style={{textAlign:"left",paddingLeft:"4%",marginTop:"25%"}}>RULES</p>
         <div id="rules_list">
           {data.map((e)=> 
              <div key={e.id}>

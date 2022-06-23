@@ -1,16 +1,8 @@
 {
   "ruleArray": [
     {
-      "name": "Custom PO",
-      "id": 5
-    },
-    {
       "name": "Assessment",
       "id": 4
-    },
-    {
-      "name": "Default Rule",
-      "id": 6
     },
     {
       "name": "Assessment",
@@ -19,6 +11,10 @@
     {
       "name": "Default Rule",
       "id": 8
+    },
+    {
+      "name": "Default Rule",
+      "id": 9
     }
   ],
   "actionArray": [
