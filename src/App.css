@@ -70,8 +70,8 @@
 }
 #rules_list>div>p{
   border:2px solid rgb(0, 106, 255);
-  padding-left:20%;
-  padding-right:20%;
+  padding-left:13%;
+  padding-right:13%;
   padding-top: 3%;
   padding-bottom: 3%;
   margin-left: 10%;
@@ -143,6 +143,9 @@ select{
 .condition{
   padding:5px;
   width:40%;
+}
+#rename{
+  padding:5px;
 }
 
 

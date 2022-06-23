@@ -106,10 +106,14 @@ function App() {
     setInput(e.target.value)
   }
 
+  const handleRenameById=(rename)=>{
+    setRuleId(rename.target.value)
+  }
 
   const handleSubmit=(e)=>{
-    const response = axios.patch(`http://localhost:8080/ruleArray/${data.length}`, { name: input }).then(()=>{
+    const response = axios.patch(`http://localhost:8080/ruleArray/${ruleId}`, { name: input }).then(()=>{
       console.log(response.name)
+      console.log(ruleId+"ruleId")
       // getData()
       // setName(res)
     }).then(()=>{
@@ -218,7 +222,7 @@ function App() {
         <div id="rules_list">
           {data.map((e)=> 
              <div key={e.id}>
-              <h5>id:{e.id}</h5>
+              <h5 style={{marginTop:"10%",marginLeft:"5px"}}>id:{e.id}</h5>
              <p>{e.name}</p> 
              <img
              style={{display:show}}
@@ -240,11 +244,18 @@ function App() {
         <p>{name}</p>
         <br/>
         <p>Button Name</p>
-        <input type="text"
+        <div style={{display:"flex"}}>
+        <input id="rename" type="text"
+        placeholder='Change rule name'
         disabled={disableOnSave}
         onChange={handleNameChange} 
         />
-        <input type="number"></input>
+        <input id="rename"
+        style={{display:show}}
+        onChange={handleRenameById}
+        type="number" placeholder='Enter id to rename' required></input>
+        </div>
+        <br/>
         <br/>
         <select>
           <option>If All</option> 
