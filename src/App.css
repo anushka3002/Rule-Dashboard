@@ -136,5 +136,13 @@ button:disabled{
 #cross:hover{
   cursor: pointer;
 }
+select{
+  padding:5px;
+  background-color: rgb(231, 235, 239);
+}
+.condition{
+  padding:5px;
+  width:40%;
+}
 
 

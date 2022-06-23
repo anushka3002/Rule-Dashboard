@@ -6,10 +6,12 @@ import axios from "axios"
 function App() {
   const [num,setNum]=useState(0)
   const [actionNum,setActionNum]=useState(0)
+  const [conditionNum,setConditionNum]=useState(0)
   const [actionData,setActionData]=useState([])
   const [data,setData]=useState([])
   const [button,setButton]=useState(false)
   const [actionButton,setActionButton]=useState(false)
+  const [conditionButton,setConditionButton]=useState(false)
   const [input,setInput]=useState("Abcd")
   const [name,setName]=useState("Default Rule")
   const [toggle,setToggle]=useState(0)
@@ -145,6 +147,13 @@ function App() {
   const getCondition=()=>{
     axios.get("http://localhost:8080/conditionArray").then((res)=>{
       setStoreCondition(res.data)
+      setNum(res.data.length)
+      if(res.data.length>=8){
+        setConditionButton(true)
+      }
+      else{
+        setConditionButton(false)
+      }
     }).catch((err)=>{
       console.log(err)
     })
@@ -158,13 +167,6 @@ function App() {
 
   
 
-
-  // const [ctime,setCtime]=useState(time)
-
-  // const updateTime=()=>{
-  //     time=new Date().toLocaleTimeString()
-  //     setCtime(time)
-  // }
 
   return (
     <div className="App">
@@ -243,6 +245,8 @@ function App() {
         <select>
           <option>Contains</option>
         </select>
+        <br/>
+        <br/>
         <input className='condition'
         style={{display:show}}
         onChange={handleCondition}
@@ -264,6 +268,7 @@ function App() {
         )}
         </div>
           <button
+          disabled={conditionButton}
           onClick={handleConditionSubmit}
            style={{display:show}} id="conditionButton">Add New Condition</button>
           <hr></hr>
@@ -286,10 +291,10 @@ function App() {
       </div>
       )}
       <hr></hr>
-      <button style={{display:show}} id="actionbutton" disabled={actionButton} onClick={addAction}>Add New Action</button>
-
+      <button style={{display:show,marginBottom:"2%"}} id="actionbutton" disabled={actionButton} onClick={addAction}>Add New Action</button>
+        
       </div>
-
+          
     </div>
     </div>
   )

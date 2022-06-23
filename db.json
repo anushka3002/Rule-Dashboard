@@ -6,15 +6,15 @@
     },
     {
       "name": "Default Rule",
-      "id": 2
-    },
-    {
-      "name": "Default Rule",
       "id": 5
     },
     {
       "name": "Default Rule",
       "id": 6
+    },
+    {
+      "name": "Default Rule",
+      "id": 7
     }
   ],
   "actionArray": [
@@ -39,6 +39,10 @@
     {
       "condition": "take assessment",
       "id": 4
+    },
+    {
+      "condition": "urgent",
+      "id": 5
     }
   ]
 }
