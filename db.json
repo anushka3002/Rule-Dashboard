@@ -30,5 +30,15 @@
       "action": "START NEW APP",
       "id": 17
     }
+  ],
+  "conditionArray": [
+    {
+      "condition": "take overview",
+      "id": 3
+    },
+    {
+      "condition": "take assessment",
+      "id": 4
+    }
   ]
 }

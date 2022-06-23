@@ -24,6 +24,10 @@ function App() {
   const [time,setTime]=useState("4:35")
   const [date,setDate]=useState("3-8-2022")
   const [disableOnSave,setDisableOnSave]=useState(false)
+  const [condition,setCondition]=useState({
+    "condition":""
+  })
+  const [storeCondition,setStoreCondition]=useState([])
 
   
   const addRule=(e)=>{
@@ -79,14 +83,14 @@ function App() {
     axios.get("http://localhost:8080/actionArray").then((res)=>{
       setActionData(res.data)
       setActionNum(res.data.length)
-      console.log("action")
+      // console.log("action")
       if(res.data.length>=5){
         setActionButton(true)
       }
       else{
         setActionButton(false)
       }
-      console.log(res.data)
+      // console.log(res.data)
     }).catch((err)=>{
       console.log(err)
     })
@@ -106,6 +110,7 @@ function App() {
   let today = new Date();
   let newDate = today.getDate()+"-"+(today.getMonth()+1)+"-"+today.getFullYear();
   let newTime= new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+
   const NotEditable=()=>{
     setToggle(0)
     setShow("none")
@@ -121,6 +126,33 @@ function App() {
   }
 
   
+  const handleCondition=(e)=>{
+    setCondition({...condition,[e.target.className]:e.target.value})
+  }
+
+  const handleConditionSubmit=(e)=>{
+    e.preventDefault()
+    axios.post("http://localhost:8080/conditionArray",condition).then(()=>{
+      setCondition({
+        "condition":""
+      })
+      console.log(condition)
+    }).then(()=>{
+      getCondition()
+    })
+  }
+
+  const getCondition=()=>{
+    axios.get("http://localhost:8080/conditionArray").then((res)=>{
+      setStoreCondition(res.data)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
+
+  useEffect(()=>{
+    getCondition()
+  },[])
 
 
 
@@ -211,9 +243,30 @@ function App() {
         <select>
           <option>Contains</option>
         </select>
-        <input type="search" placeholder='type to search and add'></input>
-        <br/>
-          <button style={{display:show}} id="conditionButton">Add New Condition</button>
+        <input className='condition'
+        disabled={disableOnSave}
+        style={{display:show}}
+        onChange={handleCondition}
+        value={condition.condition}
+        type="search" placeholder='type to search and add'></input>
+        <div id="conditionSpace">
+        {storeCondition.map((con)=>
+        <div key={con.id}>
+          <p id="conditionName">{con.condition}</p>
+          <p id="cross"
+          style={{display:show}}
+          onClick={()=>{
+            axios.delete(`http://localhost:8080/conditionArray/${con.id}`).then(res=>{
+            getCondition();
+            })
+        }}
+          >✖</p>
+        </div>
+        )}
+        </div>
+          <button
+          onClick={handleConditionSubmit}
+           style={{display:show}} id="conditionButton">Add New Condition</button>
           <hr></hr>
 
 

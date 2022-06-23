@@ -118,4 +118,23 @@
 button:disabled{
   cursor:not-allowed
 }
+#conditionSpace{
+  display: flex;
+}
+#conditionSpace>div{
+  margin: 5px;
+  display: flex;
+}
+#conditionName{
+  padding:5px;
+  border:1px solid rgb(183, 183, 189);
+}
+#cross{
+  margin-top: 20px;
+  margin-left: 5px;
+}
+#cross:hover{
+  cursor: pointer;
+}
+
 
